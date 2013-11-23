@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "EchoLogger.h"
+#import "UIKit.h"
 
 @implementation AppDelegate
 
@@ -25,6 +26,18 @@
 }
 
 - (void)seeEchoLoggerInAction {
+    int n = 10;
+    double d = 5.55;
+    BOOL b = YES;
+    NSUInteger uint = 7;
+    NSNumber *nsnum = @(18);
+    NSString *nsstring = @"I'am the string!";
+    LS(n, d, b, uint, nsnum, nsstring);
+
+    CGRect frame = (CGRect){0, 0, 200, 200};
+    CGSize size = (CGSize){200, 200};
+    LS(frame, size);
+
     L();
     L(1);
     L(@"A string", 111);
