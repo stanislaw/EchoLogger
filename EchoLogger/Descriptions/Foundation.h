@@ -16,24 +16,14 @@ static inline NSString * __attribute__((overloadable)) LoggerDescription(void) {
 #pragma mark
 #pragma mark NSLog behavior: format and arguments or NSObjects
 
-static inline NSString * __attribute__((overloadable)) LoggerDescription(id objectOrFormat, ...) {
+static inline NSString * __attribute__((overloadable)) LoggerDescription(id objectOrFormat) {
     if (class_isMetaClass(object_getClass(objectOrFormat))) {
         return [NSString stringWithFormat:@"(%@)%@", @"Class", objectOrFormat]; NSStringFromClass(objectOrFormat);
     }
 
-    if ([objectOrFormat isKindOfClass:[NSString class]] == NO) {
-        return [NSString stringWithFormat:@"(%@)%@", [objectOrFormat class], objectOrFormat];
-    }
+    return [NSString stringWithFormat:@"(%@)%@", [objectOrFormat class], objectOrFormat];
 
-    va_list ap;
-
-    va_start(ap, objectOrFormat);
-
-    NSString *body = [[NSString alloc] initWithFormat:objectOrFormat arguments:ap];
-
-  	va_end(ap);
-
-    return body;
+    return nil;
 }
 
 #pragma mark

@@ -32,7 +32,9 @@
     L(self, [NSObject new]);
 
     L([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
+    L(@"NSLOG like %@", [NSObject new]);
 
+    L(@"NSLOG like %@", 1);
 
     LS();
     LS(self, [NSObject new]);
