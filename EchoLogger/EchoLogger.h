@@ -89,3 +89,25 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
     __L(nil, finalString); \
 })
 
+// NSLog compatibility
+#define LLog(format, ...) do { \
+    if (LOGGER_FOCUSED_MODE) break; \
+    NSString *logString = [NSString stringWithFormat:format, __VA_ARGS__]; \
+    __L(__LoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), logString); \
+} while(0)
+
+#define LSLog(format, ...) do { \
+    if (LOGGER_FOCUSED_MODE) break; \
+    NSString *logString = [NSString stringWithFormat:format, __VA_ARGS__]; \
+    __L(nil, logString); \
+} while(0)
+
+#define LFLog(format, ...) __LoggerRunInFocusedMode(^{ \
+    NSString *logString = [NSString stringWithFormat:format, __VA_ARGS__]; \
+    __L(__LoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), logString); \
+})
+
+#define LSFLog(format, ...) __LoggerRunInFocusedMode(^{ \
+    NSString *logString = [NSString stringWithFormat:format, __VA_ARGS__]; \
+    __L(nil, logString); \
+})

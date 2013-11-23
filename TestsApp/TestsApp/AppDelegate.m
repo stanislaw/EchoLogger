@@ -28,39 +28,34 @@
     L();
     L(1);
     L(@"A string", 111);
-
     L(self, [NSObject new]);
-
     L([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
     L(@"NSLOG like %@", [NSObject new]);
-
-    L(@"NSLOG like %@", 1);
+    L(self);
 
     LS();
     LS(self, [NSObject new]);
     LS([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
+    LS(1);
+    LS(self);
 
+    LLog(@"NSLog like %@", [NSObject new]);
+    LSLog(@"NSLog like %@", [NSObject new]);
+    LFLog(@"NSLog like %@", [NSObject new]);
+    LSFLog(@"NSLog like %@", [NSObject new]);
 
     LF();
     id value = nil;
     LF(value);
     LF(@(1));
     LF([NSNumber class]);
-
-    L(self);
-
-    LS(1);
-    L(@"A string", 111);
-    LS(self);
-
     LF(1);
-    LSF(1);
-
-    L(@"A string", 111);
 
     LF(self);
     LF(self, [NSObject new]);
     LF([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
+
+    LSF(1);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

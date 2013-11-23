@@ -38,7 +38,7 @@ BOOL LOGGER_FOCUSED_MODE = NO;
 void __LoggerRunInFocusedMode(void (^block)(void)) {
     if (LOGGER_FOCUSED_MODE == NO) printf("\n/* Logger is entering in focused mode */\n\n");
     LOGGER_FOCUSED_MODE = YES;
-    
+
     block();
 }
 
