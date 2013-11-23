@@ -14,4 +14,9 @@
 #define LF(args...)
 #define LSF(args...)
 
+#define LLog(args...)
+#define LSLog(args...)
+#define LFLog(args...)
+#define LSFLog(args...)
+
 #endif
