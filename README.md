@@ -2,6 +2,12 @@
 
 `EchoLogger` is a logging utility. It was created to make a log-and-drop debugging routine more simple, more informative and faster than it currently is with `NSLog`. 
 
+Key features:
+
+* __"Echo"__ means that besides tracing the __values__ of what is logged, EchoLogger also echoes back the __what__ is logged.
+
+* For its main L-methods EchoLogger does not follow traditional NSLog-like input format for arguments: _(@"Format string", args...)_.  Instead you pass the what you want to be logged - pass up to 20 different objects/variables you want to know about - each argument stands for one object.
+
 After you have `EchoLogger` installed in your app, it becomes the easiest and the fastest way of doing a logging on a daily basis. 
 
 ## Installation
@@ -148,13 +154,26 @@ See <EchoLogger/Silence.h> for details.
 
 * See [Examples](https://github.com/stanislaw/EchoLogger/wiki/Examples)
 
-* To repeat the text from the beginning of this README: `EchoLogger` was created to make a log-and-drop debugging routine more simple, more informative and faster than it currently is with NSLog. It means that it's main purpose is to log something very quickly, catch the idea, and then drop the log line. It does not aim to have dozens of logging levels, or logging targets, it is not intended to be used for constant logging, so the logs could be used for future analysis. If you do need a such level of complexity, consider using much more serious tools like [CocoaLumberjack](https://github.com/robbiehanson/CocoaLumberjack).
+* To repeat the text from the beginning of this README: `EchoLogger` was created to make a log-and-drop debugging routine more simple, more informative and faster than it currently is with NSLog. It means that it's main purpose is to log something very quickly, catch the idea, and then drop the log line. It does not aim to have dozens of logging levels, or logging targets, it is not intended to be used for constant logging, when the logs are to be used for future analysis. If you do need a such level of complexity, consider using more serious tools, see 'More serious loggers'.
 
 Having that said, the author claims that he would be very thankful for any suggestions, feature requests, criticism or any other kind of a feedback (see also `TODO` section).
 
+## More serious loggers
+
+* [CocoaLumberjack](https://github.com/robbiehanson/CocoaLumberjack)
+
+> fast & simple, yet powerful & flexible logging framework for Mac and
+iOS
+
+* https://github.com/fpillet/NSLogger
+
+> A modern, flexible logging tool
+
 ## Credits
 
-Karl Kraft's [DebugLog](http://www.karlkraft.com/index.php/2009/03/23/114/) is the only source of inspiration for `EchoLogger` - it did borrowed the following tricks from DebugLog:
+EchoLogger uses `metamacros.h` from [libextobjc](https://github.com/jspahrsummers/libextobjc) library.
+
+Karl Kraft's [DebugLog](http://www.karlkraft.com/index.php/2009/03/23/114/) is the only source of inspiration for `EchoLogger` - it did borrow the following tricks from DebugLog:
 
 * Capturing the method's original environment by using `__FILE__`, `__LINE__`, `__PRETTY_FUNCTION__` from inside the `#define` directives. 
 * Importing EchoLogger inside `#ifdef DEBUG ... endif` condition to enable its work only in Debug configuration.  
@@ -174,3 +193,4 @@ Ideally, `EchoLogger` should accumulate all the possible awesome logging feature
 ## Copyright
 
 Copyright (c) 2013, Stanislaw Pankevich. See LICENSE for details.
+
