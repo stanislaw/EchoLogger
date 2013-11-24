@@ -4,17 +4,17 @@
 
 It's main purpose is to log something very quickly, catch the idea, and then drop the log line (ninja logging) - it does not aim to have dozens of logging levels, or logging targets, it is not intended to be used for constant logging, when the logs are to be used for future analysis. If you do need such level of complexity, consider using more serious tools (see "More serious loggers").
 
-Author welcomes suggestions, feature requests, criticism or any other kind of a feedback (see also `TODO` section).
-
 Key features:
 
 * __"Echo"__ means that besides tracing the __values__ of what is logged, EchoLogger also echoes back the __what__ is logged.
 
 * For its main L-methods EchoLogger does not follow traditional NSLog-like input format for arguments: _(@"Format string", args...)_.  Instead you pass the what you want to be logged - pass up to 20 different objects/variables you want to know about - each argument stands for one object.
 
-* Logging variables of any kind. What you log is not restricted to what NSLog input would allow: EchoLogger supports logging of structs like: CGRect, CGSize, MKCoordinateRegion.
+* Logging variables of any kind. What you log is not restricted to what NSLog input would allow: EchoLogger supports logging of structs like CGRect, CGSize, MKCoordinateRegion.
 
 After you have `EchoLogger` installed in your app, it becomes the easiest and the fastest way of doing a logging on a daily basis. 
+
+Author welcomes suggestions, feature requests, criticism or any other kind of a feedback (see also `TODO` section).
 
 ## Installation
 
