@@ -2,11 +2,17 @@
 
 `EchoLogger` is a logging utility. It was created to make a log-and-drop debugging routine more simple, more informative and faster than it currently is with `NSLog`. 
 
+It's main purpose is to log something very quickly, catch the idea, and then drop the log line (ninja logging) - it does not aim to have dozens of logging levels, or logging targets, it is not intended to be used for constant logging, when the logs are to be used for future analysis. If you do need such level of complexity, consider using more serious tools (see "More serious loggers").
+
+Author welcomes suggestions, feature requests, criticism or any other kind of a feedback (see also `TODO` section).
+
 Key features:
 
 * __"Echo"__ means that besides tracing the __values__ of what is logged, EchoLogger also echoes back the __what__ is logged.
 
 * For its main L-methods EchoLogger does not follow traditional NSLog-like input format for arguments: _(@"Format string", args...)_.  Instead you pass the what you want to be logged - pass up to 20 different objects/variables you want to know about - each argument stands for one object.
+
+* Logging variables of any kind. What you log is not restricted to what NSLog input would allow: EchoLogger supports logging of structs like: CGRect, CGSize, MKCoordinateRegion.
 
 After you have `EchoLogger` installed in your app, it becomes the easiest and the fastest way of doing a logging on a daily basis. 
 
@@ -151,12 +157,6 @@ See <EchoLogger/Silence.h> for details.
 * EchoLogger is able to `L()` the variables of composite types like structs: CGRect, CGSize, CGPoint. It is very easy to add a support for any new type that EchoLogger does not support yet.
 
 * There are separate files like `<EchoLogger/Descriptions/UIKit.h>` containing definitions for inspection of typed variables of corresponding framework, for example CGRect and CGSize are there in `Descriptions/UIKit.h`. Import these files if you want to log specific types from these frameworks. They are all extracted into the separate files to not couple main EchoLogger.h file with the frameworks you might not need at all.
-
-* See [Examples](https://github.com/stanislaw/EchoLogger/wiki/Examples)
-
-* To repeat the text from the beginning of this README: `EchoLogger` was created to make a log-and-drop debugging routine more simple, more informative and faster than it currently is with NSLog. It means that it's main purpose is to log something very quickly, catch the idea, and then drop the log line. It does not aim to have dozens of logging levels, or logging targets, it is not intended to be used for constant logging, when the logs are to be used for future analysis. If you do need a such level of complexity, consider using more serious tools, see 'More serious loggers'.
-
-Having that said, the author claims that he would be very thankful for any suggestions, feature requests, criticism or any other kind of a feedback (see also `TODO` section).
 
 ## More serious loggers
 
