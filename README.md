@@ -194,3 +194,7 @@ Ideally, `EchoLogger` should accumulate all the possible awesome logging feature
 
 Copyright (c) 2013, Stanislaw Pankevich. See LICENSE for details.
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/stanislaw/echologger/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
