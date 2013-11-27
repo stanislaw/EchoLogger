@@ -165,7 +165,7 @@ See <EchoLogger/Silence.h> for details.
 > fast & simple, yet powerful & flexible logging framework for Mac and
 iOS
 
-* https://github.com/fpillet/NSLogger
+* [NSLogger](https://github.com/fpillet/NSLogger)
 
 > A modern, flexible logging tool
 
