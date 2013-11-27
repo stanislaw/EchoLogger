@@ -10,6 +10,9 @@
 
 #import "Descriptions/Foundation.h"
 
+#define __VA_NUM_ARGS(...) __VA_NUM_ARGS_IMPL(0, ##__VA_ARGS__, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+#define __VA_NUM_ARGS_IMPL(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, N, ...) N
+
 /* Focused logging */
 FOUNDATION_EXPORT BOOL LOGGER_FOCUSED_MODE;
 void __LoggerRunInFocusedMode(void (^block)(void));
@@ -25,9 +28,9 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
     if (LOGGER_FOCUSED_MODE) break; \
     \
     NSString *finalString; \
-    if (strlen(#__VA_ARGS__) == 0) { \
+    metamacro_if_eq(0, __VA_NUM_ARGS(__VA_ARGS__))( \
         finalString = @"L()"; \
-    } else { \
+    )( \
         NSString *echoedInput = @("L(" #__VA_ARGS__ ")"); \
         \
         NSString *describedOutput = [@[ \
@@ -35,17 +38,18 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
         ] componentsJoinedByString:@"; "]; \
         \
         finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@" ~> "]; \
-    } \
+    ) \
     \
     __L(__LoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), finalString); \
 } while(0)
 
 #define LS(...) do { \
     if (LOGGER_FOCUSED_MODE) break; \
-    if (strlen(#__VA_ARGS__) == 0) { \
+    \
+    metamacro_if_eq(0, __VA_NUM_ARGS(__VA_ARGS__))( \
         printf("LS()\n"); \
         break; \
-    } \
+    )(); \
     \
     NSString *echoedInput = @("LS(" #__VA_ARGS__ ")"); \
     \
@@ -59,9 +63,9 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
 
 #define LF(...) __LoggerRunInFocusedMode(^{ \
     NSString *finalString; \
-    if (strlen(#__VA_ARGS__) == 0) { \
+    metamacro_if_eq(0, __VA_NUM_ARGS(__VA_ARGS__))( \
         finalString = @"LF()"; \
-    } else { \
+    )( \
         NSString *echoedInput = @("LF(" #__VA_ARGS__ ")"); \
         \
         NSString *describedOutput = [@[ \
@@ -69,16 +73,16 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
         ] componentsJoinedByString:@"; "]; \
         \
         finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@" ~> "]; \
-    } \
+    ) \
     \
     __L(__LoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), finalString); \
 })
 
 #define LSF(...) __LoggerRunInFocusedMode(^{ \
-    if (strlen(#__VA_ARGS__) == 0) { \
-        printf("LF()\n"); \
+    metamacro_if_eq(0, __VA_NUM_ARGS(__VA_ARGS__))( \
+        printf("LSF()\n"); \
         return; \
-    } \
+    )() \
     NSString *echoedInput = @("LSF(" #__VA_ARGS__ ")"); \
     \
     NSString *describedOutput = [@[ \
