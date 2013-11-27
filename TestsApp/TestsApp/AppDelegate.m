@@ -20,6 +20,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
+
     [self seeEchoLoggerInAction];
 
     return YES;
@@ -52,10 +53,16 @@
     LS(1);
     LS(self);
 
+    LLog(@"123");
     LLog(@"NSLog like %@", [NSObject new]);
+
+    LSLog(@"NSLog like %@");
     LSLog(@"NSLog like %@", [NSObject new]);
-    LFLog(@"NSLog like %@", [NSObject new]);
-    LSFLog(@"NSLog like %@", [NSObject new]);
+
+    LFLog(@"NSLog like %@");
+    LSFLog(@"NSLog like %@");
+
+    LOGGER_FOCUSED_MODE = NO;
 
     LF();
     id value = nil;
