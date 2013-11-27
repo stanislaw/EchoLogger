@@ -10,8 +10,8 @@
 
 #import "Descriptions/Foundation.h"
 
-#define __VA_NUM_ARGS(...) __VA_NUM_ARGS_IMPL(0, ##__VA_ARGS__, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
-#define __VA_NUM_ARGS_IMPL(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, N, ...) N
+#define metamacro_argcount2(...) _metamacro_argcount2(0, ##__VA_ARGS__, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+#define _metamacro_argcount2(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, N, ...) N
 
 /* Focused logging */
 FOUNDATION_EXPORT BOOL LOGGER_FOCUSED_MODE;
@@ -28,7 +28,7 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
     if (LOGGER_FOCUSED_MODE) break; \
     \
     NSString *finalString; \
-    metamacro_if_eq(0, __VA_NUM_ARGS(__VA_ARGS__))( \
+    metamacro_if_eq(0, metamacro_argcount2(__VA_ARGS__))( \
         finalString = @"L()"; \
     )( \
         NSString *echoedInput = @("L(" #__VA_ARGS__ ")"); \
@@ -46,7 +46,7 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
 #define LS(...) do { \
     if (LOGGER_FOCUSED_MODE) break; \
     \
-    metamacro_if_eq(0, __VA_NUM_ARGS(__VA_ARGS__))( \
+    metamacro_if_eq(0, metamacro_argcount2(__VA_ARGS__))( \
         printf("LS()\n"); \
         break; \
     )(); \
@@ -63,7 +63,7 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
 
 #define LF(...) __LoggerRunInFocusedMode(^{ \
     NSString *finalString; \
-    metamacro_if_eq(0, __VA_NUM_ARGS(__VA_ARGS__))( \
+    metamacro_if_eq(0, metamacro_argcount2(__VA_ARGS__))( \
         finalString = @"LF()"; \
     )( \
         NSString *echoedInput = @("LF(" #__VA_ARGS__ ")"); \
@@ -79,7 +79,7 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
 })
 
 #define LSF(...) __LoggerRunInFocusedMode(^{ \
-    metamacro_if_eq(0, __VA_NUM_ARGS(__VA_ARGS__))( \
+    metamacro_if_eq(0, metamacro_argcount2(__VA_ARGS__))( \
         printf("LSF()\n"); \
         return; \
     )() \
