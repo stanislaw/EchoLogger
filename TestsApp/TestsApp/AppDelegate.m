@@ -9,7 +9,10 @@
 #import "AppDelegate.h"
 
 #import "EchoLogger.h"
+
 #import "UIKit.h"
+#import "CoreLocation.h"
+#import "MapKit.h"
 
 @implementation AppDelegate
 
@@ -38,6 +41,8 @@
     CGRect frame = (CGRect){0, 0, 200, 200};
     CGSize size = (CGSize){200, 200};
     LS(frame, size);
+
+    LS(MKMapRectMake(0, 0, 200, 200));
 
     L();
     L(1);

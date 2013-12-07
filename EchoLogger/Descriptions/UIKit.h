@@ -5,7 +5,7 @@
 //  Copyright (c) 2013 Stanislaw Pankevich. All rights reserved.
 //
 
-#ifdef UIKIT_EXTERN
+#import <UIKit/UIKit.h>
 
 static inline NSString * __attribute__((overloadable)) LoggerDescription(CGRect rect) {
     NSString *string = [NSString stringWithFormat:@"(CGRect){%f, %f, %f, %f}", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height];
@@ -22,5 +22,3 @@ static inline NSString * __attribute__((overloadable)) LoggerDescription(CGPoint
     NSString *string = [NSString stringWithFormat:@"(CGPoint){%f, %f}", point.x, point.y];
     return string;
 }
-
-#endif
