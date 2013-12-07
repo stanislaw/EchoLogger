@@ -16,3 +16,13 @@ static inline NSString * __attribute__((overloadable)) LoggerDescription(MKMapRe
     NSString *string = [NSString stringWithFormat:@"(MKMapRect){%f, %f, %f, %f}", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height];
     return string;
 }
+
+static inline NSString * __attribute__((overloadable)) LoggerDescription(MKMapPoint point) {
+    NSString *string = [NSString stringWithFormat:@"(MKMapPoint){%f, %f}", point.x, point.y];
+    return string;
+}
+
+static inline NSString * __attribute__((overloadable)) LoggerDescription(MKMapSize size) {
+    NSString *string = [NSString stringWithFormat:@"(MKMapSize){%f, %f}", size.width, size.height];
+    return string;
+}
