@@ -8,15 +8,15 @@
 #ifndef Logger_Silence_h
 #define Logger_Silence_h
 
-#define L(args...)
-#define LS(args...)
+#define L(args...) ((void)0)
+#define LS(args...) ((void)0)
 
-#define LF(args...)
-#define LSF(args...)
+#define LF(args...) ((void)0)
+#define LSF(args...) ((void)0)
 
-#define LLog(args...)
-#define LSLog(args...)
-#define LFLog(args...)
-#define LSFLog(args...)
+#define LLog(args...) ((void)0)
+#define LSLog(args...) ((void)0)
+#define LFLog(args...) ((void)0)
+#define LSFLog(args...) ((void)0)
 
 #endif
