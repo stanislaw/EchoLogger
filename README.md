@@ -169,7 +169,7 @@ iOS
 
 > A modern, flexible logging tool
 
-For other loggers see [iOS-Projects-Catalogue/DebuggingTools/Logging](https://github.com/stanislaw/iOS-Projects-Catalogue#DebuggingTools/Logging).
+For other loggers see [iOS-Projects-Catalogue: DebuggingTools/Logging](https://github.com/stanislaw/iOS-Projects-Catalogue#DebuggingTools/Logging).
 
 ## Credits
 
