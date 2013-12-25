@@ -1,14 +1,19 @@
 //
-//  Logger.m
+//  EchoLogger
 //
-//  Created by Stanislaw Pankevich on 12/9/12.
-//  Copyright (c) 2012 Stanislaw Pankevich. All rights reserved.
+//  EchoLogger.m
 //
+//  Created by Stanislaw Pankevich on 9/7/13.
+//  Copyright (c) 2013 Stanislaw Pankevich. All rights reserved.
+//
+
 
 #import "EchoLogger.h"
 
+
 #pragma mark
 #pragma mark L family methods
+
 
 void __L(NSString *sourceInfo, NSString *logString) {
     NSMutableArray *resultComponents = [NSMutableArray array];
@@ -30,10 +35,13 @@ void __L(NSString *sourceInfo, NSString *logString) {
     fprintf(stdout, "%s", resultString.UTF8String);
 }
 
+
 #pragma mark
 #pragma mark Focused mode
 
+
 BOOL LOGGER_FOCUSED_MODE = NO;
+
 
 void __LoggerRunInFocusedMode(void (^block)(void)) {
     if (LOGGER_FOCUSED_MODE == NO) printf("\n/* Logger is entering in focused mode */\n\n");
@@ -42,8 +50,10 @@ void __LoggerRunInFocusedMode(void (^block)(void)) {
     block();
 }
 
+
 #pragma mark
 #pragma mark Source information
+
 
 NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *funcName) {
     NSString *fileName = [[NSString stringWithUTF8String:file] lastPathComponent];
@@ -57,3 +67,4 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
 
     return sourceInfo;
 }
+
