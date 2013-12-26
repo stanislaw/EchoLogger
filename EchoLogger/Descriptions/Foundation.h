@@ -12,7 +12,7 @@
 #import <objc/runtime.h>
 
 
-static inline NSString * __attribute__((overloadable)) LoggerDescription(void) {
+static inline NSString * __attribute__((overloadable)) EchoLoggerDescription(void) {
     return nil;
 }
 
@@ -21,7 +21,7 @@ static inline NSString * __attribute__((overloadable)) LoggerDescription(void) {
 #pragma mark NSLog behavior: format and arguments or NSObjects
 
 
-static inline NSString * __attribute__((overloadable)) LoggerDescription(id objectOrFormat) {
+static inline NSString * __attribute__((overloadable)) EchoLoggerDescription(id objectOrFormat) {
     if (class_isMetaClass(object_getClass(objectOrFormat))) {
         return [NSString stringWithFormat:@"(%@)%@", @"Class", objectOrFormat]; NSStringFromClass(objectOrFormat);
     }
@@ -36,7 +36,7 @@ static inline NSString * __attribute__((overloadable)) LoggerDescription(id obje
 #pragma mark BOOL
 
 
-static inline NSString * __attribute__((overloadable)) LoggerDescription(BOOL yes_or_no) {
+static inline NSString * __attribute__((overloadable)) EchoLoggerDescription(BOOL yes_or_no) {
     if (yes_or_no)
         return(@"(BOOL)Yes");
     else
@@ -48,31 +48,31 @@ static inline NSString * __attribute__((overloadable)) LoggerDescription(BOOL ye
 #pragma mark Numeric
 
 
-static inline NSString * __attribute__((overloadable)) LoggerDescription(int number) {
+static inline NSString * __attribute__((overloadable)) EchoLoggerDescription(int number) {
     NSString *string = [NSString stringWithFormat:@"(int)%d", number];
     return string;
 }
 
 
-static inline NSString * __attribute__((overloadable)) LoggerDescription(long number) {
+static inline NSString * __attribute__((overloadable)) EchoLoggerDescription(long number) {
     NSString *string = [NSString stringWithFormat:@"(long)%ld", number];
     return string;
 }
 
 
-static inline NSString * __attribute__((overloadable)) LoggerDescription(float number) {
+static inline NSString * __attribute__((overloadable)) EchoLoggerDescription(float number) {
     NSString *string = [NSString stringWithFormat:@"(float)%f", number];
     return string;
 }
 
 
-static inline NSString * __attribute__((overloadable)) LoggerDescription(NSUInteger number) {
+static inline NSString * __attribute__((overloadable)) EchoLoggerDescription(NSUInteger number) {
     NSString *string = [NSString stringWithFormat:@"(NSUInteger)%lu", (unsigned long)number];
     return string;
 }
 
 
-static inline NSString * __attribute__((overloadable)) LoggerDescription(NSTimeInterval timeInterval) {     NSString *string = [NSString stringWithFormat:@"(NSTimeInterval)%f", (double)timeInterval];
+static inline NSString * __attribute__((overloadable)) EchoLoggerDescription(NSTimeInterval timeInterval) {     NSString *string = [NSString stringWithFormat:@"(NSTimeInterval)%f", (double)timeInterval];
     return string;
 }
 
@@ -81,7 +81,7 @@ static inline NSString * __attribute__((overloadable)) LoggerDescription(NSTimeI
 #pragma mark C string
 
 
-static inline NSString * __attribute__((overloadable)) LoggerDescription(char *obj) {
+static inline NSString * __attribute__((overloadable)) EchoLoggerDescription(char *obj) {
     NSString *string = [NSString stringWithFormat:@"(C string char*)%s", obj];
     return string;
 }
@@ -91,7 +91,7 @@ static inline NSString * __attribute__((overloadable)) LoggerDescription(char *o
 #pragma mark Structs
 
 
-static inline NSString * __attribute__((overloadable)) LoggerDescription(NSRange range) {
+static inline NSString * __attribute__((overloadable)) EchoLoggerDescription(NSRange range) {
     NSString *string = [NSString stringWithFormat:@"(NSRange){%lu, %lu}", (unsigned long)range.location, (unsigned long)range.length];
     return string;
 }

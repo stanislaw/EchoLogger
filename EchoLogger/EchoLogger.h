@@ -27,7 +27,7 @@ NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *
 
 
 #define __L__ITER(INDEX, ARG) \
-    LoggerDescription(ARG),
+    EchoLoggerDescription(ARG),
 
 
 #define L(...) do { \

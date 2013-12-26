@@ -11,21 +11,21 @@
 #import <UIKit/UIKit.h>
 
 
-static inline NSString * __attribute__((overloadable)) LoggerDescription(CGRect rect) {
+static inline NSString * __attribute__((overloadable)) EchoLoggerDescription(CGRect rect) {
     NSString *string = [NSString stringWithFormat:@"(CGRect){%f, %f, %f, %f}", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height];
 
     return string;
 }
 
 
-static inline NSString * __attribute__((overloadable)) LoggerDescription(CGSize size) {
+static inline NSString * __attribute__((overloadable)) EchoLoggerDescription(CGSize size) {
     NSString *string = [NSString stringWithFormat:@"(CGSize){%f, %f}", size.width, size.height];
 
     return string;
 }
 
 
-static inline NSString * __attribute__((overloadable)) LoggerDescription(CGPoint point) {
+static inline NSString * __attribute__((overloadable)) EchoLoggerDescription(CGPoint point) {
     NSString *string = [NSString stringWithFormat:@"(CGPoint){%f, %f}", point.x, point.y];
     
     return string;
