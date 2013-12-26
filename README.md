@@ -45,6 +45,10 @@ See definitions in `EchoLogger/Descriptions/` for details.
 
 EchoLogger has the following two methods to produce logging information: method `L` and its less verbose companion `LS()`.
 
+> Q: Why such name for method: L()? 
+
+> A: It is simple. "L" stands for "log" and it is the shortest possible name ever for a logging method.
+
 ### L()
 
 `L` stands for __"log"__.
@@ -149,7 +153,7 @@ NSStringFromClass([AppDelegate class]));
 #else
 #import <EchoLogger/Silence.h>
 // L, LS, LSF, LF are defined as nothing so no logging occurs.
-See <EchoLogger/Silence.h> for details.
+// See <EchoLogger/Silence.h> for details.
 #endif 
 ```
 
