@@ -67,7 +67,7 @@
     LFLog(@"NSLog like %@");
     LSFLog(@"NSLog like %@");
 
-    LOGGER_FOCUSED_MODE = NO;
+    EchoLoggerFocusedModeEnabled = NO;
 
     LF();
     id value = nil;

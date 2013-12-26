@@ -18,12 +18,12 @@
 #define _metamacro_argcount_alt(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, N, ...) N
 
 
-FOUNDATION_EXPORT BOOL LOGGER_FOCUSED_MODE;
-void __LoggerRunInFocusedMode(void (^block)(void));
+FOUNDATION_EXPORT BOOL EchoLoggerFocusedModeEnabled;
+void __EchoLoggerRunInFocusedMode(void (^block)(void));
 
 
 void __L(NSString *sourceInfo, NSString *logString);
-NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *funcName);
+NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *funcName);
 
 
 #define __L__ITER(INDEX, ARG) \
@@ -31,7 +31,7 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
 
 
 #define L(...) do { \
-    if (LOGGER_FOCUSED_MODE) break; \
+    if (EchoLoggerFocusedModeEnabled) break; \
     \
     NSString *finalString; \
     metamacro_if_eq(0, metamacro_argcount_alt(__VA_ARGS__))( \
@@ -46,12 +46,12 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
         finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@" ~> "]; \
     ) \
     \
-    __L(__LoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), finalString); \
+    __L(__EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), finalString); \
 } while(0)
 
 
 #define LS(...) do { \
-    if (LOGGER_FOCUSED_MODE) break; \
+    if (EchoLoggerFocusedModeEnabled) break; \
     \
     metamacro_if_eq(0, metamacro_argcount_alt(__VA_ARGS__))( \
         printf("LS()\n"); \
@@ -69,7 +69,7 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
 } while(0)
 
 
-#define LF(...) __LoggerRunInFocusedMode(^{ \
+#define LF(...) __EchoLoggerRunInFocusedMode(^{ \
     NSString *finalString; \
     metamacro_if_eq(0, metamacro_argcount_alt(__VA_ARGS__))( \
         finalString = @"LF()"; \
@@ -83,11 +83,11 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
         finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@" ~> "]; \
     ) \
     \
-    __L(__LoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), finalString); \
+    __L(__EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), finalString); \
 })
 
 
-#define LSF(...) __LoggerRunInFocusedMode(^{ \
+#define LSF(...) __EchoLoggerRunInFocusedMode(^{ \
     metamacro_if_eq(0, metamacro_argcount_alt(__VA_ARGS__))( \
         printf("LSF()\n"); \
         return; \
@@ -105,19 +105,19 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
 
 // NSLog compatibility
 #define LLog(...) do { \
-    if (LOGGER_FOCUSED_MODE) break; \
+    if (EchoLoggerFocusedModeEnabled) break; \
     NSString *logString; \
     metamacro_if_eq(1, metamacro_argcount(__VA_ARGS__))( \
         logString = metamacro_head(__VA_ARGS__); \
     )( \
         logString = [NSString stringWithFormat:metamacro_head(__VA_ARGS__), metamacro_tail(__VA_ARGS__)]; \
     ) \
-    __L(__LoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), logString); \
+    __L(__EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), logString); \
 } while(0)
 
 
 #define LSLog(...) do { \
-    if (LOGGER_FOCUSED_MODE) break; \
+    if (EchoLoggerFocusedModeEnabled) break; \
     NSString *logString; \
     metamacro_if_eq(1, metamacro_argcount(__VA_ARGS__))( \
         logString = metamacro_head(__VA_ARGS__); \
@@ -128,18 +128,18 @@ NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *func
 } while(0)
 
 
-#define LFLog(...) __LoggerRunInFocusedMode(^{ \
+#define LFLog(...) __EchoLoggerRunInFocusedMode(^{ \
     NSString *logString; \
     metamacro_if_eq(1, metamacro_argcount(__VA_ARGS__))( \
         logString = metamacro_head(__VA_ARGS__); \
     )( \
         logString = [NSString stringWithFormat:metamacro_head(__VA_ARGS__), metamacro_tail(__VA_ARGS__)]; \
     ) \
-    __L(__LoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), logString); \
+    __L(__EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), logString); \
 })
 
 
-#define LSFLog(...) __LoggerRunInFocusedMode(^{ \
+#define LSFLog(...) __EchoLoggerRunInFocusedMode(^{ \
     NSString *logString; \
     metamacro_if_eq(1, metamacro_argcount(__VA_ARGS__))( \
         logString = metamacro_head(__VA_ARGS__); \

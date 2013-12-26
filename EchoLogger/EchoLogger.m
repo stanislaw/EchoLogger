@@ -40,12 +40,12 @@ void __L(NSString *sourceInfo, NSString *logString) {
 #pragma mark Focused mode
 
 
-BOOL LOGGER_FOCUSED_MODE = NO;
+BOOL EchoLoggerFocusedModeEnabled = NO;
 
 
-void __LoggerRunInFocusedMode(void (^block)(void)) {
-    if (LOGGER_FOCUSED_MODE == NO) printf("\n/* Logger is entering in focused mode */\n\n");
-    LOGGER_FOCUSED_MODE = YES;
+void __EchoLoggerRunInFocusedMode(void (^block)(void)) {
+    if (EchoLoggerFocusedModeEnabled == NO) printf("\n/* Logger is entering in focused mode */\n\n");
+    EchoLoggerFocusedModeEnabled = YES;
 
     block();
 }
@@ -55,7 +55,7 @@ void __LoggerRunInFocusedMode(void (^block)(void)) {
 #pragma mark Source information
 
 
-NSString * __LoggerSourceInfo(const char *file, int lineNumber, const char *funcName) {
+NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *funcName) {
     NSString *fileName = [[NSString stringWithUTF8String:file] lastPathComponent];
 
 #pragma clang diagnostic push

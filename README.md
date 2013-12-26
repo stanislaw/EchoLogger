@@ -122,8 +122,7 @@ If you need to maximize a focused logging (heavy variant), do the following as e
 ```objective-c
 int main(int argc, char *argv[])
 {
-    #define NSLog(args...) // indent for readability
-    LOGGER_FOCUSED_MODE = YES;
+    EchoLoggerFocusedModeEnabled = YES;
 
     // From this point you will never see any output except that F-methods produce
 
