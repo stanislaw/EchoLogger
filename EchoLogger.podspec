@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'EchoLogger'
-  s.version = '0.0.7'
+  s.version = '0.0.8'
   s.license = { :type => 'MIT', :file => 'LICENSE' }
   s.summary = 'EchoLogger.'
   s.homepage = 'https://github.com/stanislaw/EchoLogger'
