@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'EchoLogger'
-  s.version = '0.0.9'
+  s.version = '0.0.10'
   s.license = { :type => 'MIT', :file => 'LICENSE' }
   s.summary = 'EchoLogger.'
   s.homepage = 'https://github.com/stanislaw/EchoLogger'
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
 
   s.framework = 'Foundation'
 
-  s.weak_frameworks = 'UIKit', 'MapKit', 'CoreLocation'
+  # s.weak_frameworks = 'UIKit', 'MapKit', 'CoreLocation'
 
   s.requires_arc = true
 end
