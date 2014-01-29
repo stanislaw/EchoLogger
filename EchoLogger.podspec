@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  // Commented until NSStringFromAnyObject will be published
+  # Commented until NSStringFromAnyObject will be published
   # s.dependency 'NSStringFromAnyObject'
 
 end
