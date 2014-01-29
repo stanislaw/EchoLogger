@@ -11,7 +11,8 @@
 #import <Foundation/Foundation.h>
 #import "libextobjc/metamacros.h"
 
-#import "Descriptions/Foundation.h"
+
+#import <NSStringFromAnyObject/NSStringFromAnyObject.h>
 
 
 #define metamacro_argcount_alt(...) _metamacro_argcount_alt(0, ##__VA_ARGS__, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
@@ -27,7 +28,7 @@ NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *
 
 
 #define __L__ITER(INDEX, ARG) \
-    EchoLoggerDescription(ARG),
+    NSStringFromAnyObject(ARG),
 
 
 #define L(...) do { \
@@ -56,16 +57,16 @@ NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *
     metamacro_if_eq(0, metamacro_argcount_alt(__VA_ARGS__))( \
         printf("LS()\n"); \
         break; \
-    )(); \
-    \
-    NSString *echoedInput = @("LS(" #__VA_ARGS__ ")"); \
-    \
-    NSString *describedOutput = [@[ \
-    metamacro_foreach(__L__ITER,, __VA_ARGS__) \
-    ] componentsJoinedByString:@"; "]; \
-    \
-    NSString *finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@" ~> "]; \
-    __L(nil, finalString); \
+    )( \
+        NSString *echoedInput = @("LS(" #__VA_ARGS__ ")"); \
+        \
+        NSString *describedOutput = [@[ \
+                                       metamacro_foreach(__L__ITER,, __VA_ARGS__) \
+                                       ] componentsJoinedByString:@"; "]; \
+        \
+        NSString *finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@" ~> "]; \
+        __L(nil, finalString); \
+            ); \
 } while(0)
 
 

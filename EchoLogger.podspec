@@ -11,9 +11,15 @@ Pod::Spec.new do |s|
   s.source_files = 'EchoLogger/**/*.{h,m}'
   s.header_mappings_dir = 'EchoLogger'
 
+  s.ios.deployment_target = '5.0'
+  s.osx.deployment_target = '10.7'
+
   s.framework = 'Foundation'
 
   # s.weak_frameworks = 'UIKit', 'MapKit', 'CoreLocation'
 
   s.requires_arc = true
+
+  s.dependency 'NSStringFromAnyObject', :podspec => "https://raw.github.com/stanislaw/NSStringFromAnyObject/master/NSStringFromAnyObject.podspec"
+
 end

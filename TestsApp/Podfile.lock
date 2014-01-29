@@ -1,0 +1,14 @@
+PODS:
+  - NSStringFromAnyObject (0.0.1)
+
+DEPENDENCIES:
+  - NSStringFromAnyObject (from `https://github.com/stanislaw/NSStringFromAnyObject`)
+
+EXTERNAL SOURCES:
+  NSStringFromAnyObject:
+    :git: https://github.com/stanislaw/NSStringFromAnyObject
+
+SPEC CHECKSUMS:
+  NSStringFromAnyObject: cc2d6fed04ef63286204294d4a471aa2e6f21399
+
+COCOAPODS: 0.29.0

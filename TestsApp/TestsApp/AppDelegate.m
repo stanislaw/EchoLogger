@@ -10,10 +10,6 @@
 
 #import "EchoLogger.h"
 
-#import "UIKit.h"
-#import "CoreLocation.h"
-#import "MapKit.h"
-
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -42,8 +38,10 @@
     CGSize size = (CGSize){200, 200};
     LS(frame, size);
 
+#ifdef MK_EXTERN
     LS(MKMapRectMake(0, 0, 200, 200));
-
+#endif
+    
     L();
     L(1);
     L(@"A string", 111);
