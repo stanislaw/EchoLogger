@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.dependency 'NSStringFromAnyObject', :podspec => "https://raw.github.com/stanislaw/NSStringFromAnyObject/master/NSStringFromAnyObject.podspec"
+  // Commented until NSStringFromAnyObject will be published
+  # s.dependency 'NSStringFromAnyObject'
 
 end
