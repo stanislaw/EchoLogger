@@ -32,15 +32,6 @@ It is a good idea to add `EchoLogger` to .pch file of your project like:
 #import <EchoLogger.h>
 ```
 
-And you may want to add the inspection strings for specific data types from Cocoa frameworks (only Foundation stuff is included by default): 
-
-```objective-c
-#import <EchoLogger/Descriptions/MapKit.h>
-#import <EchoLogger/Descriptions/CoreLocation.h>
-```
-
-See definitions in `EchoLogger/Descriptions/` for details.
-
 ## L-methods
 
 EchoLogger has the following two methods to produce logging information: method `L` and its less verbose companion `LS()`.
@@ -99,7 +90,26 @@ LS(n, d, b, uint, nsnum, nsstring) ~> (int)10; (NSTimeInterval)5.550000; (BOOL)Y
 LS(frame, size) ~> (CGRect){0.000000, 0.000000, 200.000000, 200.000000}; (CGSize){200.000000, 200.000000}
 ```
 
-### Focused logging
+## EchoLogger and NSStringFromAnyObject
+
+EchoLogger has [NSStringFromAnyObject project](https://github.com/stanislaw/NSStringFromAnyObject) as its dependency. This project is used to provide EchoLogger with NSString representations for arbitrary objects be it Objective-C objects, C objects or custom structs found in frameworks like UIKit, Map Kit, Core Location (CGRect, MKCoordinateRegion, CLLocationCoordinate2D etc).
+
+By default EchoLogger imports only the what NSStringObject has in its defaults: NSString representations for Objective-C, C, Foundation objects. UIKit, Map Kit, Core Location are disabled by default not to couple EchoLogger with frameworks you might not need at all.
+
+So if you may want to be able to inspect the objects or structs specific
+to any of these frameworks: UIKit, Map Kit, Core Location - import their specific NSStringFromAnyObject headers:
+
+```objective-c
+#import <EchoLogger.h>
+
+#import <NSStringFromAnyObject/UIKit.h>
+#import <NSStringFromAnyObject/CoreLocation.h>
+#import <NSStringFromAnyObject/MapKit.h>
+```
+
+See [NSStringFromAnyObject project page] for details.
+
+## Focused logging
 
 Besides `L` and `LS` EchoLogger has corresponding `LF` - __"log focused"__ and `LSF` - __"log shortly, focused"__ methods.
 
@@ -146,9 +156,8 @@ NSStringFromClass([AppDelegate class]));
 ```objective-c
 // Your app's global .pch header file
 #ifdef DEBUG
-// We do import EchoLogger and the descriptions we want to use:
+// We do import EchoLogger:
 #import <EchoLogger/EchoLogger.h>
-#import <EchoLogger/Descriptions/...>
 // Now L, LS, LSF, LF are defined, the logging does work.
 #else
 #import <EchoLogger/Silence.h>
@@ -158,8 +167,6 @@ NSStringFromClass([AppDelegate class]));
 ```
 
 * EchoLogger is able to `L()` the variables of composite types like structs: CGRect, CGSize, CGPoint. It is very easy to add a support for any new type that EchoLogger does not support yet.
-
-* There are separate files like `<EchoLogger/Descriptions/UIKit.h>` containing definitions for inspection of typed variables of corresponding framework, for example CGRect and CGSize are there in `Descriptions/UIKit.h`. Import these files if you want to log specific types from these frameworks. They are all extracted into the separate files to not couple main EchoLogger.h file with the frameworks you might not need at all.
 
 ## More serious loggers
 
