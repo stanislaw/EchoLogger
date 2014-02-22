@@ -107,7 +107,7 @@ to any of these frameworks: UIKit, Map Kit, Core Location - import their specifi
 #import <NSStringFromAnyObject/MapKit.h>
 ```
 
-See [NSStringFromAnyObject project page] for details.
+See [NSStringFromAnyObject project page](https://github.com/stanislaw/NSStringFromAnyObject) for details.
 
 ## Focused logging
 
