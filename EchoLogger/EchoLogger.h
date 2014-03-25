@@ -34,31 +34,11 @@ NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *
 #define L(...) do { \
     if (EchoLoggerFocusedModeEnabled) break; \
     \
-    NSString *finalString; \
     metamacro_if_eq(0, metamacro_argcount_alt(__VA_ARGS__))( \
-        finalString = @"L()"; \
-    )( \
-        NSString *echoedInput = @("L(" #__VA_ARGS__ ")"); \
-        \
-        NSString *describedOutput = [@[ \
-            metamacro_foreach(__L__ITER,, __VA_ARGS__) \
-        ] componentsJoinedByString:@"; "]; \
-        \
-        finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@" ~> "]; \
-    ) \
-    \
-    __L(__EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), finalString); \
-} while(0)
-
-
-#define LS(...) do { \
-    if (EchoLoggerFocusedModeEnabled) break; \
-    \
-    metamacro_if_eq(0, metamacro_argcount_alt(__VA_ARGS__))( \
-        printf("LS()\n"); \
+        printf("L()\n"); \
         break; \
     )( \
-        NSString *echoedInput = @("LS(" #__VA_ARGS__ ")"); \
+        NSString *echoedInput = @("L(" #__VA_ARGS__ ")"); \
         \
         NSString *describedOutput = [@[ \
                                        metamacro_foreach(__L__ITER,, __VA_ARGS__) \
@@ -66,16 +46,18 @@ NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *
         \
         NSString *finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@" ~> "]; \
         __L(nil, finalString); \
-            ); \
+    ); \
 } while(0)
 
 
-#define LF(...) __EchoLoggerRunInFocusedMode(^{ \
+#define LL(...) do { \
+    if (EchoLoggerFocusedModeEnabled) break; \
+    \
     NSString *finalString; \
     metamacro_if_eq(0, metamacro_argcount_alt(__VA_ARGS__))( \
-        finalString = @"LF()"; \
+        finalString = @"LL()"; \
     )( \
-        NSString *echoedInput = @("LF(" #__VA_ARGS__ ")"); \
+        NSString *echoedInput = @("LL(" #__VA_ARGS__ ")"); \
         \
         NSString *describedOutput = [@[ \
             metamacro_foreach(__L__ITER,, __VA_ARGS__) \
@@ -85,22 +67,40 @@ NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *
     ) \
     \
     __L(__EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), finalString); \
+} while(0)
+
+
+#define LF(...) __EchoLoggerRunInFocusedMode(^{ \
+    metamacro_if_eq(0, metamacro_argcount_alt(__VA_ARGS__))( \
+        printf("LF()\n"); \
+    )( \
+        NSString *echoedInput = @("LF(" #__VA_ARGS__ ")"); \
+        \
+        NSString *describedOutput = [@[ \
+            metamacro_foreach(__L__ITER,, __VA_ARGS__) \
+        ] componentsJoinedByString:@"; "]; \
+        \
+        NSString *finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@" ~> "]; \
+        __L(nil, finalString); \
+    ) \
 })
 
 
-#define LSF(...) __EchoLoggerRunInFocusedMode(^{ \
+#define LLF(...) __EchoLoggerRunInFocusedMode(^{ \
+    NSString *finalString; \
     metamacro_if_eq(0, metamacro_argcount_alt(__VA_ARGS__))( \
-        printf("LSF()\n"); \
-        return; \
-    )() \
-    NSString *echoedInput = @("LSF(" #__VA_ARGS__ ")"); \
+        finalString = @"LLF()"; \
+    )( \
+        NSString *echoedInput = @("LLF(" #__VA_ARGS__ ")"); \
+        \
+        NSString *describedOutput = [@[ \
+            metamacro_foreach(__L__ITER,, __VA_ARGS__) \
+        ] componentsJoinedByString:@"; "]; \
+        \
+        finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@" ~> "]; \
+    ) \
     \
-    NSString *describedOutput = [@[ \
-    metamacro_foreach(__L__ITER,, __VA_ARGS__) \
-    ] componentsJoinedByString:@"; "]; \
-    \
-    NSString *finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@" ~> "]; \
-    __L(nil, finalString); \
+    __L(__EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), finalString); \
 })
 
 
@@ -113,11 +113,11 @@ NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *
     )( \
         logString = [NSString stringWithFormat:metamacro_head(__VA_ARGS__), metamacro_tail(__VA_ARGS__)]; \
     ) \
-    __L(__EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), logString); \
+    __L(nil, logString); \
 } while(0)
 
 
-#define LSLog(...) do { \
+#define LLLog(...) do { \
     if (EchoLoggerFocusedModeEnabled) break; \
     NSString *logString; \
     metamacro_if_eq(1, metamacro_argcount(__VA_ARGS__))( \
@@ -125,7 +125,7 @@ NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *
     )( \
         logString = [NSString stringWithFormat:metamacro_head(__VA_ARGS__), metamacro_tail(__VA_ARGS__)]; \
     ) \
-    __L(nil, logString); \
+    __L(__EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), logString); \
 } while(0)
 
 
@@ -136,17 +136,17 @@ NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *
     )( \
         logString = [NSString stringWithFormat:metamacro_head(__VA_ARGS__), metamacro_tail(__VA_ARGS__)]; \
     ) \
-    __L(__EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), logString); \
+    __L(nil, logString); \
 })
 
 
-#define LSFLog(...) __EchoLoggerRunInFocusedMode(^{ \
+#define LLFLog(...) __EchoLoggerRunInFocusedMode(^{ \
     NSString *logString; \
     metamacro_if_eq(1, metamacro_argcount(__VA_ARGS__))( \
         logString = metamacro_head(__VA_ARGS__); \
     )( \
         logString = [NSString stringWithFormat:metamacro_head(__VA_ARGS__), metamacro_tail(__VA_ARGS__)]; \
     ) \
-    __L(nil, logString); \
+    __L(__EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__), logString); \
 })
 

@@ -34,15 +34,15 @@ It is a good idea to add `EchoLogger` to .pch file of your project like:
 
 ## L-methods
 
-EchoLogger has the following two methods to produce logging information: method `L` and its less verbose companion `LS()`.
+L` stands for __"log"__.
+
+EchoLogger has the following two methods to produce logging information: method `L` and its more verbose companion `LL()`.
 
 > Q: Why such name for method: L()? 
 
 > A: It is simple. "L" stands for "log" and it is the shortest possible name ever for a logging method.
 
 ### L()
-
-`L` stands for __"log"__.
 
 ```objective-c
 int n = 10;
@@ -58,16 +58,14 @@ CGSize size = (CGSize){200, 200};
 L(frame, size);
 ```
 
-will produce console output:
+Will produce :
 
 ```
-[com.apple.main-thread] -[AppDelegate seeEchoLoggerInAction] (AppDelegate.m:35) L(n, d, b, uint, nsnum, nsstring) ~> (int)10; (NSTimeInterval)5.550000; (BOOL)Yes; (NSUInteger)7; (__NSCFNumber)18; (__NSCFConstantString)I'am the string!
-[com.apple.main-thread] -[AppDelegate seeEchoLoggerInAction] (AppDelegate.m:39) L(frame, size) ~> (CGRect){0.000000, 0.000000, 200.000000, 200.000000}; (CGSize){200.000000, 200.000000}
+L(n, d, b, uint, nsnum, nsstring) ~> (int)10; (NSTimeInterval)5.550000; (BOOL)Yes; (NSUInteger)7; (__NSCFNumber)18; (__NSCFConstantString)I'am the string!
+L(frame, size) ~> (CGRect){0.000000, 0.000000, 200.000000, 200.000000}; (CGSize){200.000000, 200.000000}
 ```
 
-### LS()
-
-`L` method has its `S`-postfixed companion: `LS`, which means __"log shortly"__ - `LS()` produce the similar output the `L()` method does, but without inclusion of any environment information: queue label, method name from which S-method is called, and a file with line number where it is located _are not displayed_.
+### LL()
 
 ```objective-c
 int n = 10;
@@ -76,28 +74,28 @@ BOOL b = YES;
 NSUInteger uint = 7;
 NSNumber *nsnum = @(18);
 NSString *nsstring = @"I'am the string!";
-LS(n, d, b, uint, nsnum, nsstring);
+L(n, d, b, uint, nsnum, nsstring);
 
 CGRect frame = (CGRect){0, 0, 200, 200};
 CGSize size = (CGSize){200, 200};
-LS(frame, size);
+L(frame, size);
 ```
 
-Will produce just:
+will produce console:
 
 ```
-LS(n, d, b, uint, nsnum, nsstring) ~> (int)10; (NSTimeInterval)5.550000; (BOOL)Yes; (NSUInteger)7; (__NSCFNumber)18; (__NSCFConstantString)I'am the string!
-LS(frame, size) ~> (CGRect){0.000000, 0.000000, 200.000000, 200.000000}; (CGSize){200.000000, 200.000000}
+[com.apple.main-thread] -[AppDelegate seeEchoLoggerInAction] (AppDelegate.m:35) L(n, d, b, uint, nsnum, nsstring) ~> (int)10; (NSTimeInterval)5.550000; (BOOL)Yes; (NSUInteger)7; (__NSCFNumber)18; (__NSCFConstantString)I'am the string!
+[com.apple.main-thread] -[AppDelegate seeEchoLoggerInAction] (AppDelegate.m:39) L(frame, size) ~> (CGRect){0.000000, 0.000000, 200.000000, 200.000000}; (CGSize){200.000000, 200.000000}
 ```
 
 ## EchoLogger and NSStringFromAnyObject
 
-EchoLogger has [NSStringFromAnyObject project](https://github.com/stanislaw/NSStringFromAnyObject) as its dependency. This project is used to provide EchoLogger with NSString representations for arbitrary objects be it Objective-C objects, C objects or custom structs found in frameworks like UIKit, Map Kit, Core Location (CGRect, MKCoordinateRegion, CLLocationCoordinate2D etc).
+EchoLogger has [NSStringFromAnyObject project](https://github.com/stanislaw/NSStringFromAnyObject) as its dependency. This project is used to provide EchoLogger with NSString representations for arbitrary objects be it Objective-C objects, C objects or custom structs found in frameworks like UIKit, MapKit, CoreLocation (CGRect, MKCoordinateRegion, CLLocationCoordinate2D etc).
 
 By default EchoLogger imports only the what NSStringObject has in its defaults: NSString representations for Objective-C, C, Foundation objects. UIKit, Map Kit, Core Location are disabled by default not to couple EchoLogger with frameworks you might not need at all.
 
 So if you may want to be able to inspect the objects or structs specific
-to any of these frameworks: UIKit, Map Kit, Core Location - import their specific NSStringFromAnyObject headers:
+to any of these frameworks: UIKit, MapKit, CoreLocation - import their specific NSStringFromAnyObject headers:
 
 ```objective-c
 #import <EchoLogger.h>
@@ -111,16 +109,16 @@ See [NSStringFromAnyObject project page](https://github.com/stanislaw/NSStringFr
 
 ## Focused logging
 
-Besides `L` and `LS` EchoLogger has corresponding `LF` - __"log focused"__ and `LSF` - __"log shortly, focused"__ methods.
+Besides `L` and `LL` EchoLogger has corresponding `LF` - __"log focused"__ and `LLF` - __"log verbosely, focused"__ methods.
 
 The idea of focused logging was taken from description of Cedar's feature: [Focused specs](https://github.com/pivotal/cedar) (see Focused specs section there).
 
-The light variant of focused logging is that all `L()` and `LS()` methods will fall silent after the first invocation of any of the F-postfixed methods:
+The light variant of focused logging is that all `L()` and `LL()` methods will fall silent after the first invocation of any of the F-postfixed methods:
 
 ```objective-c
 // All L methods before LF will produce output
 L(...) // Will produce output
-LS(...) // Will produce output
+LL(...) // Will produce output
 ...
 LF(...) // All L methods except F-postfixed will fall silent at this point
 ... 
@@ -158,10 +156,10 @@ NSStringFromClass([AppDelegate class]));
 #ifdef DEBUG
 // We do import EchoLogger:
 #import <EchoLogger/EchoLogger.h>
-// Now L, LS, LSF, LF are defined, the logging does work.
+// Now L, LL, LF, LLF are defined, the logging does work.
 #else
 #import <EchoLogger/Silence.h>
-// L, LS, LSF, LF are defined as nothing so no logging occurs.
+// L, LL, LF, LLF are defined as nothing so no logging occurs.
 // See <EchoLogger/Silence.h> for details.
 #endif 
 ```
