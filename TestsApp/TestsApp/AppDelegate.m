@@ -32,14 +32,14 @@
     NSUInteger uint = 7;
     NSNumber *nsnum = @(18);
     NSString *nsstring = @"I'am the string!";
-    LS(n, d, b, uint, nsnum, nsstring);
+    LL(n, d, b, uint, nsnum, nsstring);
 
     CGRect frame = (CGRect){0, 0, 200, 200};
     CGSize size = (CGSize){200, 200};
-    LS(frame, size);
+    LL(frame, size);
 
 #ifdef MK_EXTERN
-    LS(MKMapRectMake(0, 0, 200, 200));
+    LL(MKMapRectMake(0, 0, 200, 200));
 #endif
     
     L();
@@ -47,23 +47,21 @@
     L(@"A string", 111);
     L(self, [NSObject new]);
     L([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
-    L(@"NSLOG like %@", [NSObject new]);
     L(self);
 
-    LS();
-    LS(self, [NSObject new]);
-    LS([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
-    LS(1);
-    LS(self);
+    LL();
+    LL(self, [NSObject new]);
+    LL([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
+    LL(1);
+    LL(self);
 
     LLog(@"123");
     LLog(@"NSLog like %@", [NSObject new]);
 
-    LSLog(@"NSLog like %@");
-    LSLog(@"NSLog like %@", [NSObject new]);
+    LLLog(@"NSLog like %@", [NSObject new]);
 
-    LFLog(@"NSLog like %@");
-    LSFLog(@"NSLog like %@");
+    LFLog(@"NSLog like");
+    LLFLog(@"NSLog like");
 
     EchoLoggerFocusedModeEnabled = NO;
 
@@ -78,7 +76,7 @@
     LF(self, [NSObject new]);
     LF([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
 
-    LSF(1);
+    LLF(1);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

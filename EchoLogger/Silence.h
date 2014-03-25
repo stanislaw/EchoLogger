@@ -9,14 +9,14 @@
 
 
 #define L(args...) ((void)0)
-#define LS(args...) ((void)0)
+#define LL(args...) ((void)0)
 
 
 #define LF(args...) ((void)0)
-#define LSF(args...) ((void)0)
+#define LLF(args...) ((void)0)
 
 
 #define LLog(args...) ((void)0)
-#define LSLog(args...) ((void)0)
+#define LLLog(args...) ((void)0)
 #define LFLog(args...) ((void)0)
-#define LSFLog(args...) ((void)0)
+#define LLFLog(args...) ((void)0)
