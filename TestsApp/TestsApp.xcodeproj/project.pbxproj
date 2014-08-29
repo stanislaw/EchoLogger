@@ -16,6 +16,7 @@
 		863E38081840833300C5030E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 863E38071840833300C5030E /* AppDelegate.m */; };
 		863E380A1840833300C5030E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 863E38091840833300C5030E /* Images.xcassets */; };
 		863E38311840834000C5030E /* EchoLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 863E382F1840834000C5030E /* EchoLogger.m */; };
+		8657DDFF19B0EEBF00C9FAB6 /* EchoLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 863E382F1840834000C5030E /* EchoLogger.m */; };
 		8680E4CD1852CDB600B2D841 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8680E4CC1852CDB600B2D841 /* MapKit.framework */; };
 		86891E3E18999605004A4558 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 863E37F71840833300C5030E /* Foundation.framework */; };
 		86891E4118999605004A4558 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86891E4018999605004A4558 /* main.m */; };
@@ -343,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8657DDFF19B0EEBF00C9FAB6 /* EchoLogger.m in Sources */,
 				86891E4118999605004A4558 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

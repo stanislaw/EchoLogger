@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+#import "EchoLogger.h"
+
 int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
         
-        // insert code here...
-        NSLog(@"Hello, World!");
+
+        L(1);
         
     }
     return 0;
