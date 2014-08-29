@@ -12,43 +12,10 @@
 
 
 #pragma mark
-#pragma mark L family methods
-
-
-void __L(NSString *sourceInfo, NSString *logString) {
-    NSMutableArray *resultComponents = [NSMutableArray array];
-
-    if (sourceInfo) {
-        [resultComponents addObject:sourceInfo];
-    }
-
-    if (logString) {
-        [resultComponents addObject:logString];
-    }
-
-    NSString *resultString = [resultComponents componentsJoinedByString:@" "];
-
-    if ([resultString hasSuffix:@"\n"] == NO) {
-        resultString = [resultString stringByAppendingString:@"\n"];
-	}
-
-    fprintf(stdout, "%s", resultString.UTF8String);
-}
-
-
-#pragma mark
 #pragma mark Focused mode
 
 
 BOOL EchoLoggerFocusedModeEnabled = NO;
-
-
-void __EchoLoggerRunInFocusedMode(void (^block)(void)) {
-    if (EchoLoggerFocusedModeEnabled == NO) printf("\n/* Logger is entering in focused mode */\n\n");
-    EchoLoggerFocusedModeEnabled = YES;
-
-    block();
-}
 
 
 #pragma mark
@@ -63,7 +30,7 @@ NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *
     const char *queueLabel = dispatch_queue_get_label(dispatch_get_current_queue());
 #pragma clang diagnostic pop
 
-    NSString *sourceInfo = [NSString stringWithFormat:@"[%s] %s (%s:%d)", queueLabel, funcName, fileName.UTF8String, lineNumber];
+    NSString *sourceInfo = [NSString stringWithFormat:@"%s:%d; %s; %s", fileName.UTF8String, lineNumber, funcName, queueLabel];
 
     return sourceInfo;
 }

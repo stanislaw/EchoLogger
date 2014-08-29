@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "EchoLogger.h"
+#import <NSStringFromAnyObject/UIKit.h>
 
 @implementation AppDelegate
 
@@ -75,8 +76,6 @@
     LF(self);
     LF(self, [NSObject new]);
     LF([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
-
-    LLF(1);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

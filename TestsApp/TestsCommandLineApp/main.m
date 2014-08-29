@@ -16,9 +16,18 @@ int main(int argc, const char * argv[])
     @autoreleasepool {
         
 
-        L(1);
-        
+        id num = @(1);
+        id string = @"String";
+        id array = @[];
+
+        L(num);
+        L(num, string, array);
+
+        L(num, string, array);
+        L(num, string, array);
+        L(num, string, array);
     }
+    
     return 0;
 }
 
