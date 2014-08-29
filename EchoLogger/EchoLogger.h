@@ -55,7 +55,7 @@ NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *
     \
     NSString *finalString; \
     metamacro_if_eq(0, metamacro_argcount_alt(__VA_ARGS__))( \
-        finalString = @"LL()"; \
+        finalString = @""; \
     )( \
         NSString *echoedInput = @("" #__VA_ARGS__ ""); \
         \
