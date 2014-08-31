@@ -27,6 +27,15 @@
 }
 
 - (void)seeEchoLoggerInAction {
+    int intNumber = 10;
+    double doubleNumber = 5.55;
+    BOOL boolValue = YES;
+    NSUInteger unsignedIntNumber = 7;
+    NSNumber *number = @(18);
+    NSString *string = @"I'am the string!";
+    CGRect frame = (CGRect){0, 0, 200, 200};
+    CGSize size = (CGSize){200, 200};
+
     printf("\nL()\n\n");
 
     L(1);
@@ -35,6 +44,9 @@
     L([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
     L(self);
 
+    L(intNumber, doubleNumber, boolValue, unsignedIntNumber, number, string);
+    L(frame, size);
+
     printf("\nLL()\n\n");
 
     LL(self, [NSObject new]);
@@ -42,16 +54,8 @@
     LL(1);
     LL(self);
 
-    int n = 10;
-    double d = 5.55;
-    BOOL b = YES;
-    NSUInteger uint = 7;
-    NSNumber *nsnum = @(18);
-    NSString *nsstring = @"I'am the string!";
-    LL(n, d, b, uint, nsnum, nsstring);
+    LL(intNumber, doubleNumber, boolValue, unsignedIntNumber, number, string);
 
-    CGRect frame = (CGRect){0, 0, 200, 200};
-    CGSize size = (CGSize){200, 200};
     LL(frame, size);
 
     EchoLoggerFocusedModeEnabled = NO;
