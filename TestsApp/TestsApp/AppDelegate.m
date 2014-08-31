@@ -27,6 +27,21 @@
 }
 
 - (void)seeEchoLoggerInAction {
+    printf("\nL()\n\n");
+
+    L(1);
+    L(@"A string", 111);
+    L(self, [NSObject new]);
+    L([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
+    L(self);
+
+    printf("\nLL()\n\n");
+
+    LL(self, [NSObject new]);
+    LL([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
+    LL(1);
+    LL(self);
+
     int n = 10;
     double d = 5.55;
     BOOL b = YES;
@@ -39,34 +54,8 @@
     CGSize size = (CGSize){200, 200};
     LL(frame, size);
 
-#ifdef MK_EXTERN
-    LL(MKMapRectMake(0, 0, 200, 200));
-#endif
-    
-    L();
-    L(1);
-    L(@"A string", 111);
-    L(self, [NSObject new]);
-    L([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
-    L(self);
-
-    LL();
-    LL(self, [NSObject new]);
-    LL([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
-    LL(1);
-    LL(self);
-
-    LLog(@"123");
-    LLog(@"NSLog like %@", [NSObject new]);
-
-    LLLog(@"NSLog like %@", [NSObject new]);
-
-    LFLog(@"NSLog like");
-    LLFLog(@"NSLog like");
-
     EchoLoggerFocusedModeEnabled = NO;
 
-    LF();
     id value = nil;
     LF(value);
     LF(@(1));
@@ -76,6 +65,21 @@
     LF(self);
     LF(self, [NSObject new]);
     LF([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
+
+    printf("\nLLog()\n\n");
+
+    LLog(@"123");
+    LLog(@"NSLog like %@", [NSObject new]);
+
+    printf("\nLLLog()\n\n");
+
+    LLLog(@"NSLog like %@", [NSObject new]);
+
+    printf("\nLFLog()\n\n");
+    LFLog(@"NSLog like");
+
+    printf("\nLLFog()\n\n");
+    LLFLog(@"NSLog like");
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

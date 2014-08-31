@@ -34,19 +34,14 @@ NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *
 #define L(...) do { \
     if (EchoLoggerFocusedModeEnabled) break; \
     \
-    metamacro_if_eq(0, metamacro_argcount_alt(__VA_ARGS__))( \
-        printf("EL>\n"); \
-        break; \
-    )( \
-        NSString *echoedInput = @("EL> " #__VA_ARGS__ ""); \
-        \
-        NSString *describedOutput = [@[ \
-                                       metamacro_foreach(__L__ITER,, __VA_ARGS__) \
-                                       ] componentsJoinedByString:@"; "]; \
-        \
-        NSString *finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@"\n-> "]; \
-        fprintf(stdout, "%s\n", finalString.UTF8String); \
-    ); \
+    NSString *echoedInput = @("EL> " #__VA_ARGS__ ""); \
+    \
+    NSString *describedOutput = [@[ \
+                                   metamacro_foreach(__L__ITER,, __VA_ARGS__) \
+                                   ] componentsJoinedByString:@"; "]; \
+    \
+    NSString *finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@"\n-> "]; \
+    fprintf(stdout, "%s\n", finalString.UTF8String); \
 } while(0)
 
 
@@ -54,41 +49,35 @@ NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *
     if (EchoLoggerFocusedModeEnabled) break; \
     \
     NSString *finalString; \
-    metamacro_if_eq(0, metamacro_argcount_alt(__VA_ARGS__))( \
-        finalString = @""; \
-    )( \
-        NSString *echoedInput = @("" #__VA_ARGS__ ""); \
-        \
-        NSString *describedOutput = [@[ \
-            metamacro_foreach(__L__ITER,, __VA_ARGS__) \
-        ] componentsJoinedByString:@"; "]; \
-        \
-        finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@"\n-> "]; \
-    ) \
     \
-    fprintf(stdout, "EL %s> %s\n", __EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__).UTF8String, finalString.UTF8String); \
+    NSString *echoedInput = @("" #__VA_ARGS__ ""); \
+    \
+    NSString *describedOutput = [@[ \
+        metamacro_foreach(__L__ITER,, __VA_ARGS__) \
+    ] componentsJoinedByString:@"; "]; \
+    \
+    finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@"\n-> "]; \
+    \
+    fprintf(stdout, "EL: %s> %s\n", __EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__).UTF8String, finalString.UTF8String); \
 } while(0)
 
 
 #define LF(...) do { \
-    metamacro_if_eq(0, metamacro_argcount_alt(__VA_ARGS__))( \
-        printf("EL:focused>\n"); \
-    )( \
-        NSString *echoedInput = @("EL:focused> " #__VA_ARGS__ ); \
-        \
-        NSString *describedOutput = [@[ \
-            metamacro_foreach(__L__ITER,, __VA_ARGS__) \
-        ] componentsJoinedByString:@"; "]; \
-        \
-        NSString *finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@"\n-> "]; \
-        fprintf(stdout, "%s\n", finalString.UTF8String); \
-    ) \
+    NSString *echoedInput = @("EL:focused> " #__VA_ARGS__ ); \
+    \
+    NSString *describedOutput = [@[ \
+        metamacro_foreach(__L__ITER,, __VA_ARGS__) \
+    ] componentsJoinedByString:@"; "]; \
+    \
+    NSString *finalString = [@[ echoedInput, describedOutput] componentsJoinedByString:@"\n-> "]; \
+    fprintf(stdout, "%s\n", finalString.UTF8String); \
 } while(0);
 
 
 // NSLog compatibility
 #define LLog(...) do { \
     if (EchoLoggerFocusedModeEnabled) break; \
+    \
     NSString *logString; \
     metamacro_if_eq(1, metamacro_argcount(__VA_ARGS__))( \
         logString = metamacro_head(__VA_ARGS__); \
@@ -107,7 +96,7 @@ NSString * __EchoLoggerSourceInfo(const char *file, int lineNumber, const char *
     )( \
         logString = [NSString stringWithFormat:metamacro_head(__VA_ARGS__), metamacro_tail(__VA_ARGS__)]; \
     ) \
-    fprintf(stdout, "EL %s> %s\n", __EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__).UTF8String, logString.UTF8String); \
+    fprintf(stdout, "EL: %s> %s\n", __EchoLoggerSourceInfo(__FILE__, __LINE__, __PRETTY_FUNCTION__).UTF8String, logString.UTF8String); \
 } while(0)
 
 
