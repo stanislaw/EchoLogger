@@ -12,7 +12,7 @@ Key features:
 
 * Logging variables of any kind. What you log is not restricted to what NSLog input would allow: EchoLogger supports logging of structs like CGRect, CGSize, MKCoordinateRegion.
 
-After you have `EchoLogger` installed in your app, it becomes the easiest and the fastest way of doing a logging on a daily basis. 
+After you have `EchoLogger` installed in your app, it becomes the easiest and the fastest way of doing a console logging on a daily basis. 
 
 Author welcomes suggestions, feature requests, criticism or any other kind of a feedback (see also `TODO` section).
 
@@ -34,7 +34,7 @@ It is a good idea to add `EchoLogger` to .pch file of your project like:
 
 ## L-methods
 
-L` stands for __"log"__.
+`L` stands for __"log"__.
 
 EchoLogger has the following two methods to produce logging information: method `L` and its more verbose companion `LL()`.
 
@@ -45,64 +45,45 @@ EchoLogger has the following two methods to produce logging information: method 
 ### L()
 
 ```objective-c
-int n = 10;
-double d = 5.55;
-BOOL b = YES;
-NSUInteger uint = 7;
-NSNumber *nsnum = @(18);
-NSString *nsstring = @"I'am the string!";
-L(n, d, b, uint, nsnum, nsstring);
-
-CGRect frame = (CGRect){0, 0, 200, 200};
-CGSize size = (CGSize){200, 200};
-L(frame, size);
+L(self, [NSObject new]);
 ```
 
 Will produce :
 
 ```
-L(n, d, b, uint, nsnum, nsstring) ~> (int)10; (NSTimeInterval)5.550000; (BOOL)Yes; (NSUInteger)7; (__NSCFNumber)18; (__NSCFConstantString)I'am the string!
-L(frame, size) ~> (CGRect){0.000000, 0.000000, 200.000000, 200.000000}; (CGSize){200.000000, 200.000000}
+EL> self, [NSObject new]
+-> (AppDelegate)<AppDelegate: 0x10a7261e0>; (NSObject)<NSObject: 0x10a7425e0>
 ```
+
+See more examples on [Examples](https://github.com/stanislaw/EchoLogger/blob/master/Examples.md).
 
 ### LL()
 
 ```objective-c
-int n = 10;
-double d = 5.55;
-BOOL b = YES;
-NSUInteger uint = 7;
-NSNumber *nsnum = @(18);
-NSString *nsstring = @"I'am the string!";
-L(n, d, b, uint, nsnum, nsstring);
-
-CGRect frame = (CGRect){0, 0, 200, 200};
-CGSize size = (CGSize){200, 200};
-L(frame, size);
+L(self, [NSObject new]);
 ```
 
 will produce console:
 
 ```
-[com.apple.main-thread] -[AppDelegate seeEchoLoggerInAction] (AppDelegate.m:35) L(n, d, b, uint, nsnum, nsstring) ~> (int)10; (NSTimeInterval)5.550000; (BOOL)Yes; (NSUInteger)7; (__NSCFNumber)18; (__NSCFConstantString)I'am the string!
-[com.apple.main-thread] -[AppDelegate seeEchoLoggerInAction] (AppDelegate.m:39) L(frame, size) ~> (CGRect){0.000000, 0.000000, 200.000000, 200.000000}; (CGSize){200.000000, 200.000000}
+EL: AppDelegate.m:55; -[AppDelegate seeEchoLoggerInAction]; com.apple.main-thread> self, [NSObject new]
+-> (AppDelegate)<AppDelegate: 0x10a7261e0>; (NSObject)<NSObject: 0x10a516300>
 ```
+
+See more examples on [Examples](https://github.com/stanislaw/EchoLogger/blob/master/Examples.md).
 
 ## EchoLogger and NSStringFromAnyObject
 
-EchoLogger has [NSStringFromAnyObject project](https://github.com/stanislaw/NSStringFromAnyObject) as its dependency. This project is used to provide EchoLogger with NSString representations for arbitrary objects be it Objective-C objects, C objects or custom structs found in frameworks like UIKit, MapKit, CoreLocation (CGRect, MKCoordinateRegion, CLLocationCoordinate2D etc).
+EchoLogger has [NSStringFromAnyObject project](https://github.com/stanislaw/NSStringFromAnyObject) as its dependency. This project is used to provide EchoLogger with NSString representations for arbitrary objects be it Objective-C objects, C objects or custom structs found in frameworks like UIKit (CGRect, CGSize, CGPoint).
 
-By default EchoLogger imports only the what NSStringObject has in its defaults: NSString representations for Objective-C, C, Foundation objects. UIKit, Map Kit, Core Location are disabled by default not to couple EchoLogger with frameworks you might not need at all.
+By default EchoLogger imports only the what NSStringObject has in its defaults: NSString representations for Objective-C, C, Foundation objects. UIKit is disabled by default to not couple EchoLogger with framework you might not need at all and to make it possible to also use EchoLogger within Mac environment.
 
-So if you may want to be able to inspect the objects or structs specific
-to any of these frameworks: UIKit, MapKit, CoreLocation - import their specific NSStringFromAnyObject headers:
+Example: if you may want to be able to inspect the objects or structs specific to UIKit import its specific NSStringFromAnyObject headers:
 
 ```objective-c
 #import <EchoLogger.h>
 
 #import <NSStringFromAnyObject/UIKit.h>
-#import <NSStringFromAnyObject/CoreLocation.h>
-#import <NSStringFromAnyObject/MapKit.h>
 ```
 
 See [NSStringFromAnyObject project page](https://github.com/stanislaw/NSStringFromAnyObject) for details.
@@ -129,20 +110,12 @@ LF(...) // Will produce output
 // ...
 ```
 
-If you need to maximize a focused logging (heavy variant), do the following as early as possible in your code, something like:
+If you need to maximize a focused logging (heavy variant), do the following as early as possible in your code:
 
 ```objective-c
-int main(int argc, char *argv[])
-{
-    EchoLoggerFocusedModeEnabled = YES;
+EchoLoggerFocusedModeEnabled = YES;
 
-    // From this point you will never see any output except that F-methods produce
-
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil,
-NSStringFromClass([AppDelegate class]));
-    }
-}
+// From this point you will never see any output except that F-methods produce
 ```
 
 ## Notes
@@ -181,30 +154,26 @@ For other loggers see [iOS-Projects-Catalogue: DebuggingTools/Logging](https://g
 
 ## Credits
 
-EchoLogger uses `metamacros.h` from [libextobjc](https://github.com/jspahrsummers/libextobjc) library.
+* EchoLogger uses `metamacros.h` from [libextobjc](https://github.com/jspahrsummers/libextobjc) library.
 
-Karl Kraft's [DebugLog](http://www.karlkraft.com/index.php/2009/03/23/114/) is the only source of inspiration for `EchoLogger` - it did borrow the following tricks from DebugLog:
+* Karl Kraft's [DebugLog](http://www.karlkraft.com/index.php/2009/03/23/114/) is the only source of inspiration for `EchoLogger` - it did borrow the following tricks from DebugLog:
 
-* Capturing the method's original environment by using `__FILE__`, `__LINE__`, `__PRETTY_FUNCTION__` from inside the `#define` directives. 
-* Importing EchoLogger inside `#ifdef DEBUG ... endif` condition to enable its work only in Debug configuration.  
-* `DebugLog` logs current thread's name and it highly inspires `EchoLogger` to log a current queue's label.
+  * Capturing the method's original environment by using `__FILE__`, `__LINE__`, `__PRETTY_FUNCTION__` from inside the `#define` directives. 
+  * Importing EchoLogger inside `#ifdef DEBUG ... endif` condition to enable its work only in Debug configuration.  
+  * `DebugLog` logs current thread's name and it highly inspires `EchoLogger` to log a current queue's label.
 
-The idea of focused logging is inspired by "Focused specs" feature of [Cedar](https://github.com/pivotal/cedar) testing framework.
+* The idea of focused logging is inspired by "Focused specs" feature of [Cedar](https://github.com/pivotal/cedar) testing framework.
 
 ## TODO
 
 * Configuration property (C function pointer) to allow EchoLogger to output its content to some function other than current `fprintf` - TFLog is a good candidate as a possible alternative.
 * Customize and/or allow to customize EchoLogger's output: for example, provide a non-horizontal, not-NSLog-like, output: each L() call could produce nicely formatted columns ('one line - one EchoLogger string item' fx 'dispatch queue\nsource file\n') so they would be much easier to read in the context of all other iOS app's console output.
 
-Besides the above features, there is nothing I see that could be added to the current set of `EchoLogger` features. Let me know, if you do.
+Besides the above features, there is nothing I see that could be added to the current minimalistic set of `EchoLogger` features. Let me know, if you do.
 
-Ideally, `EchoLogger` should accumulate all the possible awesome logging features in one place - feel free to ask for a one you know it lacks - open an issue on the `EchoLogger's` [issue tracker](https://github.com/stanislaw/EchoLogger/issues).
+Feel free to ask for a feature you know EchoLogger lacks - open an issue on the `EchoLogger's` [issue tracker](https://github.com/stanislaw/EchoLogger/issues).
 
 ## Copyright
 
-Copyright (c) 2013, Stanislaw Pankevich. See LICENSE for details.
-
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/stanislaw/echologger/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+Copyright (c) 2014, Stanislaw Pankevich. See LICENSE for details.
 

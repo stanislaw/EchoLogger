@@ -38,25 +38,26 @@
 
     printf("\nL()\n\n");
 
+    L(intNumber, doubleNumber, boolValue, unsignedIntNumber, number, string);
+    L(frame, size);
+
     L(1);
     L(@"A string", 111);
     L(self, [NSObject new]);
     L([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
     L(self);
 
-    L(intNumber, doubleNumber, boolValue, unsignedIntNumber, number, string);
-    L(frame, size);
 
     printf("\nLL()\n\n");
+
+    LL(intNumber, doubleNumber, boolValue, unsignedIntNumber, number, string);
+    LL(frame, size);
 
     LL(self, [NSObject new]);
     LL([NSArray new], [NSDictionary new], NSMakeRange(0, 5));
     LL(1);
     LL(self);
 
-    LL(intNumber, doubleNumber, boolValue, unsignedIntNumber, number, string);
-
-    LL(frame, size);
 
     EchoLoggerFocusedModeEnabled = NO;
 
