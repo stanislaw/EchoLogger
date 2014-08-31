@@ -8,7 +8,7 @@ Key features:
 
 * __"Echo"__ means that besides tracing the __values__ of what is logged, EchoLogger also echoes back the __what__ is logged.
 
-* For its main L-methods EchoLogger does not follow traditional NSLog-like input format for arguments: _(@"Format string", args...)_.  Instead you pass the what you want to be logged - pass up to 20 different objects/variables you want to know about - each argument stands for one object.
+* For its main L-methods EchoLogger does not follow traditional NSLog-like input format for arguments: `(@"Format string", args...)`.  Instead you pass the what you want to be logged - pass up to 20 different objects/variables you want to know about - each argument stands for one object.
 
 * Logging variables of any kind. What you log is not restricted to what NSLog input would allow: EchoLogger supports logging of structs like CGRect, CGSize, MKCoordinateRegion.
 
@@ -78,7 +78,7 @@ EchoLogger has [NSStringFromAnyObject project](https://github.com/stanislaw/NSSt
 
 By default EchoLogger imports only the what NSStringObject has in its defaults: NSString representations for Objective-C, C, Foundation objects. UIKit is disabled by default to not couple EchoLogger with framework you might not need at all and to make it possible to also use EchoLogger within Mac environment.
 
-Example: if you may want to be able to inspect the objects or structs specific to UIKit import its specific NSStringFromAnyObject headers:
+Example: if you may want to be able to inspect structs specific to UIKit (like CGRect) import its specific NSStringFromAnyObject headers:
 
 ```objective-c
 #import <EchoLogger.h>
